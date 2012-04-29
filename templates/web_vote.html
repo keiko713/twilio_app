@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOTE | TEXT VOTE</title>
+<link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/docs.css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">
+        TEXT VOTE 
+      </a>
+      <span class="pull-right twbutton">
+      </span>
+    </div>
+  </div>
+</div><!-- /navbar -->
+<div class="container">
+<h1>{{ poll.title }}</h1>
+<h3>Start Date: {{ poll.start_date }}</h3>
+<h3>Deadline: {{ poll.deadline }}</h3>
+<ul>
+{% for choice in choices %}
+  <li>{{ choice.choice }}: {{ choice.votes }} <a class="btn btn-primary" href="/vote/{{ choice.id }}/">VOTE</a></li>
+{% endfor %}
+</ul>
+<div class="row">
+</div>
+<footer class="footer">
+  <p class="pull-right">Created by @keiko713 / <a href="https://github.com/keiko713/">Fork me on GitHub</a></p>
+</footer>
+</div><!-- /container -->
+<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+/*
+$(function(){
+   getpage();
+);
+function getpage() {
+  $.ajax({
+    type: 'GET',
+    url: "/api/view/{{ poll.id }}/",
+    success: function(data){
+      choices = data.choices;
+    }
+  });
+}
+*/
+</script>
+</body>
+</html>

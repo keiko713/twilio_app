@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEXT VOTE</title>
+<link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/docs.css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">
+        TEXT VOTE 
+      </a>
+      <span class="pull-right twbutton">
+      </span>
+    </div>
+  </div>
+</div><!-- /navbar -->
+<div class="container">
+<div class="row">
+{% for poll in polls %}
+  <div class="span3">
+    <a href="/view/{{ poll.id }}/"><h2>{{ poll.title }}</h2></a>
+    <p>
+      <a href="/web_vote/{{ poll.id }}/" class="btn btn-primary">Vote on Web</a>
+    </p>
+  </div>
+{% endfor %}
+</div>
+<footer class="footer">
+  <p class="pull-right">Created by @keiko713 / <a href="https://github.com/keiko713/">Fork me on GitHub</a></p>
+</footer>
+</div><!-- /container -->
+<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+var nextpagenum = 2;
+function getpage() {
+  $.ajax({
+    type: 'GET',
+    url: "/page/" + nextpagenum + "/",
+    success: function(data){
+      html = data.html;
+      var thumbnails = document.getElementById("id_thumbnails");
+      thumbnails.innerHTML = thumbnails.innerHTML + html;
+      adjusttime();
+
+      nextpagenum += 1;
+    }
+  });
+}
+</script>
+</body>
+</html>
