@@ -37,6 +37,21 @@ def vote(request, choice_id):
 
 @twilio_view
 def phone_vote(request):
+    body = request.POST.get('Body', None)
     r = Response()
-    r.sms('Thanks for your vote!')
+    message = ''
+    if body and body.isdigit():
+        choice_id = int(body)
+	choice = Choice.objects.filter(id=choice_id)
+	if choice:
+            c = choice[0]
+            if c.poll.is_ongoing():
+                c.votes += 1
+                c.save()
+                message = 'Thanks for your vote!'
+            else:
+                message = 'Sorry, your vote is invalid. This poll has already expired.'
+    if not message:
+        message = 'Please text a vote number correctly to vote.'
+    r.sms(message)
     return r

@@ -8,7 +8,7 @@ class Poll(models.Model):
 
     def is_ongoing(self):
         now = datetime.now()
-        if self.start_date <= now and now <= deadline:
+        if self.start_date <= now and now <= self.deadline:
             return True
         else:
             return False
