@@ -2,6 +2,7 @@ from __future__ import division
 from django.db import models
 from datetime import datetime
 
+
 class Poll(models.Model):
     title = models.CharField(max_length=200)
     start_date = models.DateTimeField()
@@ -37,3 +38,8 @@ class Choice(models.Model):
 
     def __unicode__(self):
         return self.choice
+
+
+class VoterChoice(models.Model):
+    choice = models.ForeignKey(Choice)
+    phone_number = models.CharField(max_length=20)
