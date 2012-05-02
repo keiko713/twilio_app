@@ -16,11 +16,14 @@ class Poll(models.Model):
         else:
             return 'ONGOING'
 
+    def __unicode__(self):
+        return self.title
+
 
 class Choice(models.Model):
     poll = models.ForeignKey(Poll)
     choice = models.CharField(max_length=200)
-    votes = models.IntegerField()
+    votes = models.IntegerField(default=0)
 
     def percentage(self):
         choices = self.poll.choice_set.all()
@@ -31,3 +34,6 @@ class Choice(models.Model):
             return 0
         else:
             return (self.votes / total) * 100
+
+    def __unicode__(self):
+        return self.choice
