@@ -2,7 +2,7 @@ body {
   position: relative;
   padding-top: 70px;
   background-color: #fff;
-  /* background-image: url(../img/bg_pink.png); */
+  background-image: url(../img/bg_stripe.png);
   background-repeat: repeat;
   background-position: 0 40px;
 }
@@ -13,61 +13,34 @@ body {
   }
 }
 
+.navbar-inner {
+  background-image: url(../img/red_navbar_bg2.png);
+}
+.navbar .brand {
+  color: #fff;
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+}
+
 img {
   width: 290px;
 }
 
-.twbutton {
-  display: block;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 0;
-  padding-right: 0;
-  margin-left: 20px;
-}
-
-.photo-date {
-  text-align: right;
-  margin-bottom: 5px;
-}
-
 .thumbnail {
-  padding: 10px;
+  padding: 15px;
+  background-color: #fff;
 }
 
-.thumbnail .caption {
-  width: 272px;
-  overflow: hidden;
-}
-
-.mapcanvas {
-  width: 272px;
-  height: 272px;
-}
 
 @media (max-width: 979px) and (min-width: 768px) {
   img {
     width: 220px;
-  }
-  .thumbnail .caption {
-    width: 202px;
-  }
-  .mapcanvas {
-    width: 202px;
-    height: 202px;
   }
 }
 
 @media (min-width: 1200px) {
   img {
     width: 360px;
-  }
-  .thumbnail .caption {
-    width: 342px;
-  }
-  .mapcanvas {
-    width: 342px;
-    height: 342px;
   }
 }
 

@@ -12,23 +12,38 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="/">
-        TEXT VOTE 
-      </a>
+      <a class="brand" href="/">TEXT VOTE</a>
       <span class="pull-right twbutton">
       </span>
     </div>
   </div>
 </div><!-- /navbar -->
 <div class="container">
+{% if poll.status == 'ONGOING' %}
+<span class="label label-important">{{ poll.status }}</span>
+{% else %}
+<span class="label">{{ poll.status }}</span>
+{% endif %}
 <h1>{{ poll.title }}</h1>
-<h3>Start Date: {{ poll.start_date }}</h3>
-<h3>Deadline: {{ poll.deadline }}</h3>
-<ul>
+{% if poll.status == 'ONGOING' %}
+<h3>This poll will finish in {{ poll.deadline|timeuntil }}</h3>
+{% endif %}
+{% if poll.status == 'PENDING' %}
+<h3>This poll has not yet begun. This poll will begin at {{ poll.start_date }}</h3>
+{% endif %}
+{% if poll.status == 'FINISHED' %}
+<h3>This poll has finished at {{ poll.deadline }}</h3>
+{% endif %}
+<hr>
 {% for choice in choices %}
-  <li>{{ choice.choice }} {{ choice.votes }}</li>
+<p><strong>{{ choice.choice }}</strong> : {{ choice.votes }}</p>
+{% if poll.status == 'ONGOING' %}
+<p><strong>VOTE NOW for {{ choice.choice }}</strong> : send a text '6531-9983 {{ choice.id }}' to '{{ phone_number }}'</p>
+{% endif %}
+<div class="progress progress-striped">
+  <div class="bar" style="width: {{ choice.percentage }}%;"></div>
+</div>
 {% endfor %}
-</ul>
 <div class="row">
 </div>
 <footer class="footer">

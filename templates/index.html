@@ -12,25 +12,31 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="/">
-        TEXT VOTE 
-      </a>
+      <a class="brand" href="/">TEXT VOTE</a>
       <span class="pull-right twbutton">
       </span>
     </div>
   </div>
 </div><!-- /navbar -->
 <div class="container">
-<div class="row">
+<ul class="thumbnails">
 {% for poll in polls %}
-  <div class="span3">
-    <a href="/view/{{ poll.id }}/"><h2>{{ poll.title }}</h2></a>
-    <p>
-      <a href="/web_vote/{{ poll.id }}/" class="btn btn-primary">Vote on Web</a>
-    </p>
-  </div>
+  <li class="span3">
+    <div class="thumbnail">
+      {% if poll.status == 'ONGOING' %}
+      <span class="label label-important">{{ poll.status }}</span>
+      {% else %}
+      <span class="label">{{ poll.status }}</span>
+      {% endif %}
+      <h3>{{ poll.title }}</h3>
+      <hr>
+      <p>
+        <a href="/view/{{ poll.id }}/">View detail</a>
+      </p>
+    </div>
+  </li>
 {% endfor %}
-</div>
+</ul>
 <footer class="footer">
   <p class="pull-right">Created by @keiko713 / <a href="https://github.com/keiko713/">Fork me on GitHub</a></p>
 </footer>
