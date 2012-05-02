@@ -1,4 +1,4 @@
-from polls.models import Poll, Choice
+from polls.models import Poll, Choice, VoterChoice
 from django.contrib import admin
 
 
@@ -18,3 +18,9 @@ class ChoiceAdmin(admin.ModelAdmin):
     list_display = ('poll', 'choice', 'votes', 'percentage')
 
 admin.site.register(Choice, ChoiceAdmin)
+
+
+class VoterChoiceAdmin(admin.ModelAdmin):
+    list_display = ('phone_number', 'choice')
+
+admin.site.register(VoterChoice, VoterChoiceAdmin)

@@ -54,14 +54,14 @@ def phone_vote(request):
         choice = Choice.objects.filter(id=choice_id)
         if choice:
             c = choice[0]
-            vc = VoterChoice.objects.filter(choice=c, phone_number=from_number)
+            vc = VoterChoice.objects.filter(choice__poll=c.poll, phone_number=from_number)
             if vc:
                 message = 'Sorry, you have already voted in this poll.' \
                     + ' You cannot vote twice.'
             elif c.poll.status() == 'ONGOING':
                 c.votes += 1
                 c.save()
-                vc_obj = VoterChoice(choice=choice, phone_number=from_number)
+                vc_obj = VoterChoice(choice=c, phone_number=from_number)
                 vc_obj.save()
                 message = 'Thanks for your vote!'
             elif c.poll.status() == 'PENDING':
