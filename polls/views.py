@@ -48,11 +48,11 @@ def phone_vote(request):
 	choice = Choice.objects.filter(id=choice_id)
 	if choice:
             c = choice[0]
-            if c.poll.status == 'ONGOING':
+            if c.poll.status() == 'ONGOING':
                 c.votes += 1
                 c.save()
                 message = 'Thanks for your vote!'
-            elif c.poll.status == 'PENDING':
+            elif c.poll.status() == 'PENDING':
                 message = 'Sorry, your vote is invalid. This poll has not yet begun.'
             else:
                 message = 'Sorry, your vote is invalid. This poll has already finished.'
