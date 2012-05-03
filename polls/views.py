@@ -1,6 +1,4 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
-from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from polls.models import Poll, Choice, VoterChoice
 from twilio.twiml import Response
@@ -24,23 +22,6 @@ def view(request, poll_id):
         'choices': choices,
         'phone_number': phone_number,
     }, context_instance=RequestContext(request))
-
-
-def web_vote(request, poll_id):
-    poll = get_object_or_404(Poll, pk=poll_id)
-    choices = poll.choice_set.all()
-    return render_to_response('web_vote.html', {
-        'poll': poll,
-        'choices': choices,
-    }, context_instance=RequestContext(request))
-
-
-def vote(request, choice_id):
-    choice = get_object_or_404(Choice, pk=choice_id)
-    choice.votes += 1
-    choice.save()
-    return HttpResponseRedirect(
-        reverse('polls.views.view', args=(choice.poll.id,)))
 
 
 @twilio_view
